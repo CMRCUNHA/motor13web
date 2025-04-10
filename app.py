@@ -35,8 +35,8 @@ def upload_file():
 def baixar_relatorio(nome_arquivo):
     return send_from_directory(OUTPUT_FOLDER, nome_arquivo, as_attachment=True)
 
-import os
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, host="0.0.0.0", port=port)
 
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(debug=True, host='0.0.0.0', port=port)
