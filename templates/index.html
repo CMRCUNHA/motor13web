@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Motor 13 - Relatório Pericial</title>
+    <script>
+        function baixarRelatorio(nomeArquivo) {
+            const link = document.createElement("a");
+            link.href = "/download/" + nomeArquivo;
+            link.download = nomeArquivo;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Redireciona de volta para a página principal após 2 segundos
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 2000);
+        }
+    </script>
+</head>
+<body>
+    <h2>Upload do Processo</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="pdf_file" required>
+        <button type="submit">Enviar</button>
+    </form>
+
+    {% if status %}
+        <p><strong>{{ status }}</strong></p>
+    {% endif %}
+
+    {% if relatorio_disponivel %}
+        <button onclick="baixarRelatorio('{{ nome_arquivo }}')">📥 Clique aqui para baixar o relatório</button>
+    {% endif %}
+</body>
+</html>
